@@ -17,11 +17,12 @@ public class POS {
 
     public String receipt() {
         BigDecimal netPrice = saleItem.getNetPrice();
-        BigDecimal taxAmount = taxPolicy.forItemName(saleItem.getProductName()).applyTo(netPrice);
+        Tax tax = taxPolicy.forItemName(saleItem.getProductName());
+        BigDecimal taxAmount = tax.dutyAmount(netPrice);
 
-        double roundedTax = Math.ceil(taxAmount.doubleValue() * 20) / 20;
+        TaxRounding rounding = new TaxRounding();
 
-        BigDecimal taxedPrice = netPrice.add(new BigDecimal(roundedTax));
+        BigDecimal taxedPrice = netPrice.add(rounding.round(taxAmount));
         BigDecimal salesTaxes = taxedPrice.subtract(saleItem.getNetPrice());
 
         return saleItem.getQuantity() + " " + saleItem.getProductName() + " : " + taxedPrice.toString() + "\n" +

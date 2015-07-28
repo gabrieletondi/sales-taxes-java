@@ -29,7 +29,7 @@ public class Tax {
         return rate;
     }
 
-    public BigDecimal applyTo(BigDecimal netPrice) {
+    public BigDecimal dutyAmount(BigDecimal netPrice) {
         return netPrice.divide(new BigDecimal("100")).multiply(new BigDecimal(rate));
     }
 }
