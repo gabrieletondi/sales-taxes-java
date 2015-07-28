@@ -6,10 +6,6 @@ public class Tax {
 
     private final int rate;
 
-    public int getRate() {
-        return rate;
-    }
-
     private Tax(int rate) {
         this.rate = rate;
     }
