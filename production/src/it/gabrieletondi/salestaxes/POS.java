@@ -16,7 +16,12 @@ public class POS {
     }
 
     public String receipt() {
-        BigDecimal taxedPrice = applyTax(taxPolicy.forItemName(saleItem.getProductName()));
+        BigDecimal netPrice = saleItem.getNetPrice();
+        BigDecimal taxAmount = taxPolicy.forItemName(saleItem.getProductName()).applyTo(netPrice);
+
+        double roundedTax = Math.ceil(taxAmount.doubleValue() * 20) / 20;
+
+        BigDecimal taxedPrice = netPrice.add(new BigDecimal(roundedTax));
         BigDecimal salesTaxes = taxedPrice.subtract(saleItem.getNetPrice());
 
         return saleItem.getQuantity() + " " + saleItem.getProductName() + " : " + taxedPrice.toString() + "\n" +
@@ -24,12 +29,4 @@ public class POS {
                 "Total: " + taxedPrice.toString();
     }
 
-    private BigDecimal applyTax(Tax tax) {
-        BigDecimal price = saleItem.getNetPrice();
-        BigDecimal taxAmount = price.divide(new BigDecimal(100)).multiply(new BigDecimal(tax.getRate()));
-
-        double roundedTax = Math.ceil(taxAmount.doubleValue() * 20) / 20;
-
-        return price.add(new BigDecimal(roundedTax));
-    }
 }

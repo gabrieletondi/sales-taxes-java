@@ -1,5 +1,7 @@
 package it.gabrieletondi.salestaxes;
 
+import java.math.BigDecimal;
+
 public class Tax {
 
     private final int rate;
@@ -29,5 +31,9 @@ public class Tax {
     @Override
     public int hashCode() {
         return rate;
+    }
+
+    public BigDecimal applyTo(BigDecimal netPrice) {
+        return netPrice.divide(new BigDecimal("100")).multiply(new BigDecimal(rate));
     }
 }
