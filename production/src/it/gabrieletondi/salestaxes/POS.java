@@ -7,48 +7,38 @@ import java.util.List;
 
 public class POS {
 
-    private final InMemoryWithDefaultTaxPolicy taxPolicy;
     private List<SaleItem> saleItems;
+    private Basket basket;
 
     public POS(InMemoryWithDefaultTaxPolicy taxPolicy) {
-        this.taxPolicy = taxPolicy;
+        this.basket = new Basket(taxPolicy);
         this.saleItems = new ArrayList<SaleItem>();
     }
 
     public void sell(String sellCommand) {
-        saleItems.add(SaleItem.fromSellCommand(sellCommand));
+        SaleItem saleItem = SaleItem.fromSellCommand(sellCommand);
+        saleItems.add(saleItem);
+        basket.add(saleItem);
     }
 
     public String receipt() {
         String receipt = "";
-        BigDecimal total = BigDecimal.ZERO;
-        BigDecimal salesTaxes = BigDecimal.ZERO;
 
-        for (SaleItem saleItem : saleItems) {
-            BigDecimal netPrice = saleItem.getNetPrice();
-            Tax tax = taxPolicy.forItemName(saleItem.getProductName());
-            BigDecimal taxAmount = tax.dutyAmount(netPrice);
+        for(BasketItem item : basket.getItems())
+            receipt += item.getQuantity() + " " + item.getProductName() + ": " + formatDecimal(item.getTaxedPrice()) + "\n";
 
-            BigDecimal taxedPrice = netPrice.add(taxAmount);
-            total = total.add(taxedPrice);
-            salesTaxes = salesTaxes.add(taxAmount);
+        receipt += "Sales Taxes: " + formatDecimal(basket.getSalesTaxes()) + "\n" +
+                "Total: " + formatDecimal(basket.getTotal());
 
-            DecimalFormat decimalFormat = new DecimalFormat();
-            decimalFormat.setMaximumFractionDigits(2);
-            decimalFormat.setMinimumFractionDigits(2);
+        return receipt;
+    }
 
-            receipt += saleItem.getQuantity() + " " + saleItem.getProductName() + ": " + decimalFormat.format(taxedPrice) + "\n";
-
-        }
-
+    private String formatDecimal(BigDecimal value) {
         DecimalFormat decimalFormat = new DecimalFormat();
         decimalFormat.setMaximumFractionDigits(2);
         decimalFormat.setMinimumFractionDigits(2);
 
-        receipt += "Sales Taxes: " + decimalFormat.format(salesTaxes) + "\n" +
-                "Total: " + decimalFormat.format(total);
-
-        return receipt;
+        return decimalFormat.format(value);
     }
 
 }

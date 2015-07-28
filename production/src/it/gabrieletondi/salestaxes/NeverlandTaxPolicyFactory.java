@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class NeverlandTaxPolicyFactory {
     public static InMemoryWithDefaultTaxPolicy build() {
-        Tax defaultTax = Tax.withRate(10, new NearestTo0_05Rounding());
+        Tax defaultTax = Tax.withRate(10, new NearestToFiveCentsRounding());
         Map<String, Tax> specificRules = new HashMap<String, Tax>();
         specificRules.put("chocolate bar", Tax.EXEMPT);
         specificRules.put("box of chocolates", Tax.EXEMPT);

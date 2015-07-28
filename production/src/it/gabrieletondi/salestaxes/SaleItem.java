@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 public class SaleItem {
     private final String productName;
     private final BigDecimal netPrice;
-    private final String quantity;
+    private final int quantity;
 
     public String getProductName() {
         return productName;
@@ -17,11 +17,11 @@ public class SaleItem {
         return netPrice;
     }
 
-    public String getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public SaleItem(String productName, BigDecimal netPrice, String quantity) {
+    public SaleItem(String productName, BigDecimal netPrice, int quantity) {
         this.productName = productName;
         this.netPrice = netPrice;
         this.quantity = quantity;
@@ -37,6 +37,6 @@ public class SaleItem {
         String productName = matcher.group(2);
         BigDecimal netPrice = new BigDecimal(matcher.group(3));
 
-        return new SaleItem(productName, netPrice, quantity);
+        return new SaleItem(productName, netPrice, Integer.parseInt(quantity));
     }
 }

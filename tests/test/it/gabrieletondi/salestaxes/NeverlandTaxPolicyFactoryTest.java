@@ -12,7 +12,7 @@ public class NeverlandTaxPolicyFactoryTest {
 
         Tax tax = policy.forItemName("any standard item");
 
-        assertEquals(Tax.withRate(10, new NearestTo0_05Rounding()), tax);
+        assertEquals(Tax.withRate(10, new NearestToFiveCentsRounding()), tax);
     }
 
     @Test
