@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 
 public class Tax {
 
+    public static Tax EXEMPT = Tax.withRate(0, Rounding.NONE);
+
     private final int rate;
     private final Rounding rounding;
 
@@ -23,7 +25,10 @@ public class Tax {
 
         Tax tax = (Tax) o;
 
-        return rate == tax.rate;
+        if (rate != tax.rate)
+            return false;
+
+        return rounding.getClass().equals(tax.rounding.getClass());
     }
 
     @Override
@@ -34,5 +39,10 @@ public class Tax {
     public BigDecimal dutyAmount(BigDecimal netPrice) {
         BigDecimal rawTaxAmount = netPrice.divide(new BigDecimal("100")).multiply(new BigDecimal(rate));
         return rounding.round(rawTaxAmount);
+    }
+
+    @Override
+    public String toString() {
+        return "Tax{rate=" + rate + ", rounding=" + rounding + "}";
     }
 }

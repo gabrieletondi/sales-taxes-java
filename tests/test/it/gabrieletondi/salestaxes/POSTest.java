@@ -3,9 +3,6 @@ package it.gabrieletondi.salestaxes;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import static org.junit.Assert.assertEquals;
 
 public class POSTest {
@@ -15,9 +12,7 @@ public class POSTest {
 
     @Before
     public void setUp() {
-        Map<String, Tax> specificRules = new HashMap<String, Tax>();
-        specificRules.put("book", Tax.withRate(0, new NearestTo0_05Rounding()));
-        taxPolicy = new InMemoryWithDefaultTaxPolicy(Tax.withRate(10, new NearestTo0_05Rounding()), specificRules);
+        taxPolicy = NeverlandTaxPolicyFactory.build();
         pos = new POS(taxPolicy);
     }
 
