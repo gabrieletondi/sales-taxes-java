@@ -5,13 +5,15 @@ import java.math.BigDecimal;
 public class Tax {
 
     private final int rate;
+    private final Rounding rounding;
 
-    private Tax(int rate) {
+    private Tax(int rate, Rounding rounding) {
         this.rate = rate;
+        this.rounding = rounding;
     }
 
-    public static Tax withRate(int rate) {
-        return new Tax(rate);
+    public static Tax withRate(int rate, Rounding rounding) {
+        return new Tax(rate, rounding);
     }
 
     @Override
@@ -30,6 +32,7 @@ public class Tax {
     }
 
     public BigDecimal dutyAmount(BigDecimal netPrice) {
-        return netPrice.divide(new BigDecimal("100")).multiply(new BigDecimal(rate));
+        BigDecimal rawTaxAmount = netPrice.divide(new BigDecimal("100")).multiply(new BigDecimal(rate));
+        return rounding.round(rawTaxAmount);
     }
 }

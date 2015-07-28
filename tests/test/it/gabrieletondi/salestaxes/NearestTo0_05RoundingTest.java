@@ -11,7 +11,7 @@ import java.util.Collection;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(Parameterized.class)
-public class TaxRoundingTest {
+public class NearestTo0_05RoundingTest {
 
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
@@ -27,14 +27,14 @@ public class TaxRoundingTest {
     private String expected;
     private String toBeRounded;
 
-    public TaxRoundingTest(String expected, String toBeRounded) {
+    public NearestTo0_05RoundingTest(String expected, String toBeRounded) {
         this.expected = expected;
         this.toBeRounded = toBeRounded;
     }
 
     @Test
     public void roundToNearest0_05() throws Exception {
-        TaxRounding rounding = new TaxRounding();
+        NearestTo0_05Rounding rounding = new NearestTo0_05Rounding();
 
         assertEquals(new BigDecimal(expected), rounding.round(new BigDecimal(toBeRounded)));
     }

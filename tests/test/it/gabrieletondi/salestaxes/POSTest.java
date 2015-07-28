@@ -16,14 +16,14 @@ public class POSTest {
     @Before
     public void setUp() {
         Map<String, Tax> specificRules = new HashMap<String, Tax>();
-        specificRules.put("book", Tax.withRate(0));
-        taxPolicy = new InMemoryWithDefaultTaxPolicy(Tax.withRate(10), specificRules);
+        specificRules.put("book", Tax.withRate(0, new NearestTo0_05Rounding()));
+        taxPolicy = new InMemoryWithDefaultTaxPolicy(Tax.withRate(10, new NearestTo0_05Rounding()), specificRules);
         pos = new POS(taxPolicy);
     }
 
     @Test
     public void sellOneTaxFreeNotImportedItem() throws Exception {
-        pos.sellItem("1 book at 12.49");
+        pos.sell("1 book at 12.49");
 
         String receipt = pos.receipt();
 
@@ -35,7 +35,7 @@ public class POSTest {
 
     @Test
     public void sellOneStandardTaxNotImportedItem() throws Exception {
-        pos.sellItem("1 musical CD at 14.99");
+        pos.sell("1 musical CD at 14.99");
 
         String receipt = pos.receipt();
 

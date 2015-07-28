@@ -8,8 +8,8 @@ import static org.junit.Assert.assertEquals;
 
 public class InMemoryWithDefaultTaxPolicyTest {
 
-    public static final Tax DEFAULT_TAX = Tax.withRate(10);
-    public static final Tax SPECIFIC_TAX = Tax.withRate(15);
+    public static final Tax DEFAULT_TAX = Tax.withRate(10, Rounding.NONE);
+    public static final Tax SPECIFIC_TAX = Tax.withRate(15, Rounding.NONE);
 
     @Test
     public void defaultRate() throws Exception {

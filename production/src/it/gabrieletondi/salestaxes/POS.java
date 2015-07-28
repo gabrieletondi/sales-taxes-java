@@ -11,7 +11,7 @@ public class POS {
         this.taxPolicy = taxPolicy;
     }
 
-    public void sellItem(String sellCommand) {
+    public void sell(String sellCommand) {
         saleItem = SaleItem.fromSellCommand(sellCommand);
     }
 
@@ -20,9 +20,7 @@ public class POS {
         Tax tax = taxPolicy.forItemName(saleItem.getProductName());
         BigDecimal taxAmount = tax.dutyAmount(netPrice);
 
-        TaxRounding rounding = new TaxRounding();
-
-        BigDecimal taxedPrice = netPrice.add(rounding.round(taxAmount));
+        BigDecimal taxedPrice = netPrice.add(taxAmount);
         BigDecimal salesTaxes = taxedPrice.subtract(saleItem.getNetPrice());
 
         return saleItem.getQuantity() + " " + saleItem.getProductName() + " : " + taxedPrice.toString() + "\n" +
