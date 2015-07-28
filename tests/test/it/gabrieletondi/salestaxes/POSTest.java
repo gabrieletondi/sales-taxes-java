@@ -18,4 +18,18 @@ public class POSTest {
                 "Total: 12.49";
         assertEquals(expected, receipt);
     }
+
+    @Test
+    public void sellOneStandardTaxNotImportedItem() throws Exception {
+        POS pos = new POS();
+        pos.sellItem("1 musical CD at 14.99");
+
+        String receipt = pos.receipt();
+
+        String expected = "1 musical CD : 16.49\n" +
+                "Sales Taxes: 1.50\n" +
+                "Total: 16.49";
+        assertEquals(expected, receipt);
+    }
+
 }
