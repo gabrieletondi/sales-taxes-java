@@ -2,22 +2,17 @@ package it.gabrieletondi.salestaxes;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
 
 public class POS {
 
-    private List<SaleItem> saleItems;
     private Basket basket;
 
     public POS(InMemoryWithDefaultTaxPolicy taxPolicy) {
         this.basket = new Basket(taxPolicy);
-        this.saleItems = new ArrayList<SaleItem>();
     }
 
     public void sell(String sellCommand) {
         SaleItem saleItem = SaleItem.fromSellCommand(sellCommand);
-        saleItems.add(saleItem);
         basket.add(saleItem);
     }
 
