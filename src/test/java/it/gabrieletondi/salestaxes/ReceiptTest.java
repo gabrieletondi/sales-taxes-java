@@ -1,5 +1,9 @@
 package it.gabrieletondi.salestaxes;
 
+import it.gabrieletondi.salestaxes.catalog.ShelfItem;
+import it.gabrieletondi.salestaxes.receipt.Receipt;
+import it.gabrieletondi.salestaxes.receipt.ReceiptItem;
+import it.gabrieletondi.salestaxes.tax.NeverlandTaxPolicyFactory;
 import org.junit.Before;
 import org.junit.Test;
 

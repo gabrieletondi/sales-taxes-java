@@ -1,7 +1,7 @@
 package it.gabrieletondi.salestaxes.doubles;
 
-import it.gabrieletondi.salestaxes.Category;
-import it.gabrieletondi.salestaxes.CategoryRepository;
+import it.gabrieletondi.salestaxes.catalog.Category;
+import it.gabrieletondi.salestaxes.catalog.repository.CategoryRepository;
 
 public class AllOfAKindCategoryRepository implements CategoryRepository {
     private final Category category;

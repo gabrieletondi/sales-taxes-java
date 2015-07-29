@@ -1,5 +1,12 @@
 package it.gabrieletondi.salestaxes;
 
+import it.gabrieletondi.salestaxes.catalog.Category;
+import it.gabrieletondi.salestaxes.catalog.ShelfItem;
+import it.gabrieletondi.salestaxes.tax.ByCategoryAndImportTaxPolicy;
+import it.gabrieletondi.salestaxes.tax.CompositeTax;
+import it.gabrieletondi.salestaxes.tax.PercentageTax;
+import it.gabrieletondi.salestaxes.tax.Tax;
+import it.gabrieletondi.salestaxes.tax.rounding.Rounding;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

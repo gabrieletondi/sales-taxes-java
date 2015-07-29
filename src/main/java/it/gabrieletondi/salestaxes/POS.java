@@ -1,5 +1,11 @@
 package it.gabrieletondi.salestaxes;
 
+import it.gabrieletondi.salestaxes.catalog.ShelfItem;
+import it.gabrieletondi.salestaxes.catalog.repository.CategoryRepository;
+import it.gabrieletondi.salestaxes.receipt.PlainTextReceiptFormatter;
+import it.gabrieletondi.salestaxes.receipt.Receipt;
+import it.gabrieletondi.salestaxes.tax.TaxPolicy;
+
 public class POS {
 
     private final Display display;

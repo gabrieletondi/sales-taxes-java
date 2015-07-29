@@ -1,4 +1,4 @@
-package it.gabrieletondi.salestaxes;
+package it.gabrieletondi.salestaxes.tax;
 
 import java.math.BigDecimal;
 import java.util.Arrays;

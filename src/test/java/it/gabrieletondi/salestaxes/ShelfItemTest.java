@@ -1,5 +1,8 @@
 package it.gabrieletondi.salestaxes;
 
+import it.gabrieletondi.salestaxes.catalog.Category;
+import it.gabrieletondi.salestaxes.catalog.ShelfItem;
+import it.gabrieletondi.salestaxes.catalog.repository.CategoryRepository;
 import it.gabrieletondi.salestaxes.doubles.AllOfAKindCategoryRepository;
 import org.junit.Before;
 import org.junit.Test;

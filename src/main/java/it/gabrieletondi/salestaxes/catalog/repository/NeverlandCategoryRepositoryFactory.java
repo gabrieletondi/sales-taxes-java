@@ -1,4 +1,6 @@
-package it.gabrieletondi.salestaxes;
+package it.gabrieletondi.salestaxes.catalog.repository;
+
+import it.gabrieletondi.salestaxes.catalog.Category;
 
 import java.util.HashMap;
 import java.util.Map;

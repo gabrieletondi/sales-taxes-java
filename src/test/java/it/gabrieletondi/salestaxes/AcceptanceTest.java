@@ -1,6 +1,8 @@
 package it.gabrieletondi.salestaxes;
 
+import it.gabrieletondi.salestaxes.catalog.repository.NeverlandCategoryRepositoryFactory;
 import it.gabrieletondi.salestaxes.doubles.InMemoryDisplay;
+import it.gabrieletondi.salestaxes.tax.NeverlandTaxPolicyFactory;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -1,5 +1,8 @@
 package it.gabrieletondi.salestaxes;
 
+import it.gabrieletondi.salestaxes.tax.CompositeTax;
+import it.gabrieletondi.salestaxes.tax.PercentageTax;
+import it.gabrieletondi.salestaxes.tax.rounding.NearestToFiveCentsRounding;
 import org.junit.Test;
 
 import java.math.BigDecimal;

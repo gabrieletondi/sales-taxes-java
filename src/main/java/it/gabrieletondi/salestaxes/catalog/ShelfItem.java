@@ -1,4 +1,6 @@
-package it.gabrieletondi.salestaxes;
+package it.gabrieletondi.salestaxes.catalog;
+
+import it.gabrieletondi.salestaxes.catalog.repository.CategoryRepository;
 
 import java.math.BigDecimal;
 import java.util.regex.Matcher;

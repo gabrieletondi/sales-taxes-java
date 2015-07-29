@@ -1,6 +1,8 @@
 package it.gabrieletondi.salestaxes;
 
 import it.gabrieletondi.salestaxes.doubles.FixedValueRounding;
+import it.gabrieletondi.salestaxes.tax.PercentageTax;
+import it.gabrieletondi.salestaxes.tax.rounding.Rounding;
 import org.junit.Test;
 
 import java.math.BigDecimal;

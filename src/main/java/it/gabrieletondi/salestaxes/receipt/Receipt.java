@@ -1,4 +1,8 @@
-package it.gabrieletondi.salestaxes;
+package it.gabrieletondi.salestaxes.receipt;
+
+import it.gabrieletondi.salestaxes.catalog.ShelfItem;
+import it.gabrieletondi.salestaxes.tax.Tax;
+import it.gabrieletondi.salestaxes.tax.TaxPolicy;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

@@ -1,4 +1,7 @@
-package it.gabrieletondi.salestaxes;
+package it.gabrieletondi.salestaxes.tax;
+
+import it.gabrieletondi.salestaxes.catalog.Category;
+import it.gabrieletondi.salestaxes.catalog.ShelfItem;
 
 import java.util.Arrays;
 import java.util.List;

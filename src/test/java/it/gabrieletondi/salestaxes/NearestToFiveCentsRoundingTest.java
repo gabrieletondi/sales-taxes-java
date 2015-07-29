@@ -1,5 +1,6 @@
 package it.gabrieletondi.salestaxes;
 
+import it.gabrieletondi.salestaxes.tax.rounding.NearestToFiveCentsRounding;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;

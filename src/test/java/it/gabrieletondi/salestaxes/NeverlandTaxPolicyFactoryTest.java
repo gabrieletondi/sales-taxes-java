@@ -1,5 +1,9 @@
 package it.gabrieletondi.salestaxes;
 
+import it.gabrieletondi.salestaxes.catalog.Category;
+import it.gabrieletondi.salestaxes.catalog.ShelfItem;
+import it.gabrieletondi.salestaxes.tax.*;
+import it.gabrieletondi.salestaxes.tax.rounding.NearestToFiveCentsRounding;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
