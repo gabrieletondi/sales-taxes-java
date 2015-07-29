@@ -92,7 +92,7 @@ public class POSTest {
                 "1 packet of headache pills: 9.75\n" +
                 "1 imported box of chocolates: 11.85\n" +
                 "Sales Taxes: 6.70\n" +
-                "Total: 74.68d";
+                "Total: 74.68";
 
         assertEquals(expected, display.getMessage());
     }
