@@ -47,4 +47,12 @@ public class SaleItemTest {
         assertTrue(item.isImported());
     }
 
+    @Test
+    public void multipleDigitQuantity() throws Exception {
+        SaleItem item = SaleItem.fromSellCommand("1355 book at 12.49");
+
+        assertEquals(1355, item.getQuantity());
+        assertEquals("book", item.getProductName());
+        assertEquals(new BigDecimal("12.49"), item.getNetPrice());
+    }
 }

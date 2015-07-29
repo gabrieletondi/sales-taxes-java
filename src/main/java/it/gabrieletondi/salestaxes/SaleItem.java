@@ -5,7 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class SaleItem {
-    public static final String COMMAND_PATTERN = "^(\\d)\\s([a-zA-Z\\s]*)\\sat\\s(\\d+\\.\\d{2}?)";
+    public static final String COMMAND_PATTERN = "^(\\d+)\\s([a-zA-Z\\s]*)\\sat\\s(\\d+\\.\\d{2}?)";
 
     private final String productName;
     private final BigDecimal netPrice;
