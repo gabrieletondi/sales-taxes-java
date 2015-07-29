@@ -1,20 +1,21 @@
 package it.gabrieletondi.salestaxes;
 
-import java.util.Map;
+import java.util.Arrays;
+import java.util.List;
 
 public class TaxPolicy {
-    private final PercentageTax defaultTax;
-    private final Map<String, PercentageTax> specificRules;
-    private final PercentageTax importedTax;
+    private final Tax defaultTax;
+    private final Tax importedTax;
+    private final List<Category> exemptCategories;
 
-    public TaxPolicy(PercentageTax defaultTax, Map<String, PercentageTax> specificRules, PercentageTax importedTax) {
+    public TaxPolicy(Tax defaultTax, Tax importedTax, Category...exemptCategories) {
         this.defaultTax = defaultTax;
-        this.specificRules = specificRules;
         this.importedTax = importedTax;
+        this.exemptCategories = Arrays.asList(exemptCategories);
     }
 
     public Tax forItem(ShelfItem item) {
-        Tax tax = forItemName(item.getProductName());
+        Tax tax = forCategory(item.getCategory());
 
         if (!item.isImported())
             return tax;
@@ -22,9 +23,9 @@ public class TaxPolicy {
         return new CompositeTax(tax, importedTax);
     }
 
-    private PercentageTax forItemName(String itemName) {
-        if (specificRules.containsKey(itemName))
-            return specificRules.get(itemName);
+    private Tax forCategory(Category category) {
+        if (exemptCategories.contains(category))
+            return PercentageTax.EXEMPT;
 
         return defaultTax;
     }
