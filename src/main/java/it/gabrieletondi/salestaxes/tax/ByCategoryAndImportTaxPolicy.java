@@ -1,7 +1,7 @@
 package it.gabrieletondi.salestaxes.tax;
 
+import it.gabrieletondi.salestaxes.catalog.CartItem;
 import it.gabrieletondi.salestaxes.catalog.Category;
-import it.gabrieletondi.salestaxes.catalog.ShelfItem;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,7 +17,7 @@ public class ByCategoryAndImportTaxPolicy implements TaxPolicy {
         this.exemptCategories = Arrays.asList(exemptCategories);
     }
 
-    public Tax forItem(ShelfItem item) {
+    public Tax forItem(CartItem item) {
         Tax tax = forCategory(item.getCategory());
 
         if (!item.isImported())

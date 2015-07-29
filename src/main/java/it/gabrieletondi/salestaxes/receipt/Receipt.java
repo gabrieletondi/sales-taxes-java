@@ -1,6 +1,6 @@
 package it.gabrieletondi.salestaxes.receipt;
 
-import it.gabrieletondi.salestaxes.catalog.ShelfItem;
+import it.gabrieletondi.salestaxes.catalog.CartItem;
 import it.gabrieletondi.salestaxes.tax.Tax;
 import it.gabrieletondi.salestaxes.tax.TaxPolicy;
 
@@ -33,12 +33,12 @@ public class Receipt {
         this.items = new ArrayList<ReceiptItem>();
     }
 
-    public void add(ShelfItem shelfItem) {
-        Tax tax = taxPolicy.forItem(shelfItem);
-        BigDecimal taxAmount = tax.dutyAmount(shelfItem.getNetPrice()).multiply(BigDecimal.valueOf(shelfItem.getQuantity()));
-        BigDecimal taxedAmount = shelfItem.getNetPrice().multiply(BigDecimal.valueOf(shelfItem.getQuantity())).add(taxAmount);
+    public void add(CartItem cartItem) {
+        Tax tax = taxPolicy.forItem(cartItem);
+        BigDecimal taxAmount = tax.dutyAmount(cartItem.getNetPrice()).multiply(BigDecimal.valueOf(cartItem.getQuantity()));
+        BigDecimal taxedAmount = cartItem.getNetPrice().multiply(BigDecimal.valueOf(cartItem.getQuantity())).add(taxAmount);
 
-        ReceiptItem receiptItem = new ReceiptItem(shelfItem.getProductName(), shelfItem.getQuantity(), taxedAmount, shelfItem.isImported());
+        ReceiptItem receiptItem = new ReceiptItem(cartItem.getProductName(), cartItem.getQuantity(), taxedAmount, cartItem.isImported());
         items.add(receiptItem);
 
         total = total.add(taxedAmount);

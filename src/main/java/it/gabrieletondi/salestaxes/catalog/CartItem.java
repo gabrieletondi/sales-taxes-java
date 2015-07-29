@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ShelfItem {
+public class CartItem {
     public static final String COMMAND_PATTERN = "^(\\d+)\\s([a-zA-Z\\s]*)\\sat\\s(\\d+\\.\\d{2}?)";
 
     private final String productName;
@@ -35,7 +35,7 @@ public class ShelfItem {
         return category;
     }
 
-    public ShelfItem(String productName, BigDecimal netPrice, int quantity, boolean isImported, Category category) {
+    public CartItem(String productName, BigDecimal netPrice, int quantity, boolean isImported, Category category) {
         this.productName = productName;
         this.netPrice = netPrice;
         this.quantity = quantity;
@@ -43,12 +43,12 @@ public class ShelfItem {
         this.category = category;
     }
 
-    public static ShelfItem fromSellCommand(String sellCommand, CategoryRepository categoryRepository) {
+    public static CartItem fromSellCommand(String sellCommand, CategoryRepository categoryRepository) {
         Pattern pattern = Pattern.compile(COMMAND_PATTERN);
         Matcher matcher = pattern.matcher(sellCommand);
 
         matcher.matches();
-        String quantity = matcher.group(1);
+        int quantity = Integer.parseInt(matcher.group(1));
         String productName = matcher.group(2);
         BigDecimal netPrice = new BigDecimal(matcher.group(3));
 
@@ -58,7 +58,7 @@ public class ShelfItem {
 
         Category category = categoryRepository.ofProduct(productName);
 
-        return new ShelfItem(productName, netPrice, Integer.parseInt(quantity), isImported, category);
+        return new CartItem(productName, netPrice, quantity, isImported, category);
     }
 
     private static String sanitizeImportedProductName(String productName) {

@@ -1,7 +1,7 @@
 package it.gabrieletondi.salestaxes.tax;
 
-import it.gabrieletondi.salestaxes.catalog.ShelfItem;
+import it.gabrieletondi.salestaxes.catalog.CartItem;
 
 public interface TaxPolicy {
-    Tax forItem(ShelfItem item);
+    Tax forItem(CartItem item);
 }

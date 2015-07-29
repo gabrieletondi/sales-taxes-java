@@ -1,7 +1,7 @@
 package it.gabrieletondi.salestaxes.tax;
 
+import it.gabrieletondi.salestaxes.catalog.CartItem;
 import it.gabrieletondi.salestaxes.catalog.Category;
-import it.gabrieletondi.salestaxes.catalog.ShelfItem;
 import it.gabrieletondi.salestaxes.tax.rounding.Rounding;
 import org.junit.Test;
 
@@ -16,7 +16,7 @@ public class ByCategoryAndImportTaxPolicyTest {
     public void defaultRate() throws Exception {
         ByCategoryAndImportTaxPolicy policy = new ByCategoryAndImportTaxPolicy(DEFAULT_TAX, IMPORTED_TAX);
 
-        ShelfItem item = new ShelfItem("default rate item", null, 1, false, null);
+        CartItem item = new CartItem("default rate item", null, 1, false, null);
         Tax actualTax = policy.forItem(item);
 
         assertEquals(DEFAULT_TAX, actualTax);
@@ -26,7 +26,7 @@ public class ByCategoryAndImportTaxPolicyTest {
     public void exemptCategory() throws Exception {
         ByCategoryAndImportTaxPolicy policy = new ByCategoryAndImportTaxPolicy(DEFAULT_TAX, IMPORTED_TAX, Category.BOOKS);
 
-        ShelfItem item = new ShelfItem(null, null, 0, false, Category.BOOKS);
+        CartItem item = new CartItem(null, null, 0, false, Category.BOOKS);
         Tax actualTax = policy.forItem(item);
 
         assertEquals(PercentageTax.EXEMPT, actualTax);
@@ -36,7 +36,7 @@ public class ByCategoryAndImportTaxPolicyTest {
     public void additionalTaxOnImportedItems() throws Exception {
         ByCategoryAndImportTaxPolicy policy = new ByCategoryAndImportTaxPolicy(DEFAULT_TAX, IMPORTED_TAX);
 
-        ShelfItem item = new ShelfItem(null, null, 1, true, Category.MISC);
+        CartItem item = new CartItem(null, null, 1, true, Category.MISC);
         Tax actualTax = policy.forItem(item);
 
         assertEquals(new CompositeTax(DEFAULT_TAX, IMPORTED_TAX), actualTax);

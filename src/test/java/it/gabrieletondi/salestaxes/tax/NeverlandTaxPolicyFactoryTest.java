@@ -1,7 +1,7 @@
 package it.gabrieletondi.salestaxes.tax;
 
+import it.gabrieletondi.salestaxes.catalog.CartItem;
 import it.gabrieletondi.salestaxes.catalog.Category;
-import it.gabrieletondi.salestaxes.catalog.ShelfItem;
 import it.gabrieletondi.salestaxes.tax.rounding.NearestToFiveCentsRounding;
 import org.junit.Assert;
 import org.junit.Before;
@@ -20,7 +20,7 @@ public class NeverlandTaxPolicyFactoryTest {
 
     @Test
     public void defaultRateIs10() throws Exception {
-        ShelfItem item = new ShelfItem(null, null, 0, false, Category.MISC);
+        CartItem item = new CartItem(null, null, 0, false, Category.MISC);
         Tax tax = policy.forItem(item);
 
         Assert.assertEquals(PercentageTax.withRate(10, new NearestToFiveCentsRounding()), tax);
@@ -28,28 +28,28 @@ public class NeverlandTaxPolicyFactoryTest {
 
     @Test
     public void foodIsExempt() throws Exception {
-        ShelfItem item = new ShelfItem(null, null, 0, false, Category.FOOD);
+        CartItem item = new CartItem(null, null, 0, false, Category.FOOD);
         Tax tax = policy.forItem(item);
         assertEquals(PercentageTax.EXEMPT, tax);
     }
 
     @Test
     public void booksAreExempt() throws Exception {
-        ShelfItem item = new ShelfItem(null, null, 0, false, Category.BOOKS);
+        CartItem item = new CartItem(null, null, 0, false, Category.BOOKS);
         Tax tax = policy.forItem(item);
         assertEquals(PercentageTax.EXEMPT, tax);
     }
 
     @Test
     public void medicalProductsAreExempt() throws Exception {
-        ShelfItem item = new ShelfItem(null, null, 0, false, Category.MEDICALS);
+        CartItem item = new CartItem(null, null, 0, false, Category.MEDICALS);
         Tax tax = policy.forItem(item);
         assertEquals(PercentageTax.EXEMPT, tax);
     }
 
     @Test
     public void importedItemsHaveAdditionalTax() throws Exception {
-        ShelfItem item = new ShelfItem(null, null, 0, true, Category.MISC);
+        CartItem item = new CartItem(null, null, 0, true, Category.MISC);
         Tax tax = policy.forItem(item);
 
         Tax expectedTax = new CompositeTax(PercentageTax.withRate(10, new NearestToFiveCentsRounding()), PercentageTax.withRate(5, new NearestToFiveCentsRounding()));

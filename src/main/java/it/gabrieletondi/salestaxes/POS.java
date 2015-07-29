@@ -1,6 +1,6 @@
 package it.gabrieletondi.salestaxes;
 
-import it.gabrieletondi.salestaxes.catalog.ShelfItem;
+import it.gabrieletondi.salestaxes.catalog.CartItem;
 import it.gabrieletondi.salestaxes.catalog.repository.CategoryRepository;
 import it.gabrieletondi.salestaxes.receipt.PlainTextReceiptFormatter;
 import it.gabrieletondi.salestaxes.receipt.Receipt;
@@ -19,8 +19,8 @@ public class POS {
     }
 
     public void onSellCommand(String sellCommand) {
-        ShelfItem shelfItem = ShelfItem.fromSellCommand(sellCommand, categoryRepository);
-        receipt.add(shelfItem);
+        CartItem cartItem = CartItem.fromSellCommand(sellCommand, categoryRepository);
+        receipt.add(cartItem);
     }
 
     public void onSaleComplete() {

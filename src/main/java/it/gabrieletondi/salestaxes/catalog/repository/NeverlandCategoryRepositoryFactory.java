@@ -5,16 +5,18 @@ import it.gabrieletondi.salestaxes.catalog.Category;
 import java.util.HashMap;
 import java.util.Map;
 
+import static it.gabrieletondi.salestaxes.catalog.Category.*;
+
 public class NeverlandCategoryRepositoryFactory {
 
     public static CategoryRepository build() {
         Map<String, Category> mapping = new HashMap<String, Category>();
-        mapping.put("book", Category.BOOKS);
-        mapping.put("music CD", Category.MISC);
-        mapping.put("chocolate bar", Category.FOOD);
-        mapping.put("box of chocolates", Category.FOOD);
-        mapping.put("bottle of perfume", Category.MISC);
-        mapping.put("packet of headache pills", Category.MEDICALS);
+        mapping.put("book", BOOKS);
+        mapping.put("music CD", MISC);
+        mapping.put("chocolate bar", FOOD);
+        mapping.put("box of chocolates", FOOD);
+        mapping.put("bottle of perfume", MISC);
+        mapping.put("packet of headache pills", MEDICALS);
 
         return new InMemoryCategoryRepository(mapping);
     }

@@ -5,15 +5,19 @@ import java.text.DecimalFormat;
 
 public class PlainTextReceiptFormatter {
     public String format(Receipt receipt) {
-        String result = "";
+        StringBuilder result = new StringBuilder();
 
         for(ReceiptItem item : receipt.getItems())
-            result += formatReceiptItem(item);
+            result.append(formatReceiptItem(item));
 
-        result += "Sales Taxes: " + formatDecimal(receipt.getSalesTaxes()) + "\n" +
+        result.append(formatTail(receipt));
+
+        return result.toString();
+    }
+
+    private String formatTail(Receipt receipt) {
+        return "Sales Taxes: " + formatDecimal(receipt.getSalesTaxes()) + "\n" +
                 "Total: " + formatDecimal(receipt.getTotal());
-
-        return result;
     }
 
     private String formatReceiptItem(ReceiptItem item) {
@@ -27,7 +31,6 @@ public class PlainTextReceiptFormatter {
 
     private String formatDecimal(BigDecimal value) {
         DecimalFormat decimalFormat = new DecimalFormat("0.00#");
-
         return decimalFormat.format(value);
     }
 }

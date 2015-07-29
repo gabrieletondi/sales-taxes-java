@@ -1,6 +1,6 @@
 package it.gabrieletondi.salestaxes.receipt;
 
-import it.gabrieletondi.salestaxes.catalog.ShelfItem;
+import it.gabrieletondi.salestaxes.catalog.CartItem;
 import it.gabrieletondi.salestaxes.tax.NeverlandTaxPolicyFactory;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,8 +28,8 @@ public class ReceiptTest {
 
     @Test
     public void addItemsToReceipt() throws Exception {
-        receipt.add(new ShelfItem("product 1", new BigDecimal("3.44"), 2, false, null));
-        receipt.add(new ShelfItem("product 2", new BigDecimal("0.35"), 1, true, null));
+        receipt.add(new CartItem("product 1", new BigDecimal("3.44"), 2, false, null));
+        receipt.add(new CartItem("product 2", new BigDecimal("0.35"), 1, true, null));
 
         List<ReceiptItem> items = receipt.getItems();
 
@@ -49,8 +49,8 @@ public class ReceiptTest {
 
     @Test
     public void calculatesTotals() throws Exception {
-        receipt.add(new ShelfItem("product 1", new BigDecimal("12.34"), 2, false, null));
-        receipt.add(new ShelfItem("product 2", new BigDecimal("2.23"), 1, false, null));
+        receipt.add(new CartItem("product 1", new BigDecimal("12.34"), 2, false, null));
+        receipt.add(new CartItem("product 2", new BigDecimal("2.23"), 1, false, null));
 
         assertEquals(new BigDecimal("29.66"), receipt.getTotal());
         assertEquals(new BigDecimal("2.75"), receipt.getSalesTaxes());
