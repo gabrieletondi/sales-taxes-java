@@ -21,12 +21,14 @@ public class PlainTextReceiptFormatter {
     }
 
     private String formatReceiptItem(ReceiptItem item) {
-        String source = "";
+        return item.getQuantity() + " " + importedLabel(item) + item.getProductName() + ": " + formatDecimal(item.getTaxedPrice()) + "\n";
+    }
 
+    private String importedLabel(ReceiptItem item) {
         if (item.isImported())
-            source = "imported ";
+            return "imported ";
 
-        return item.getQuantity() + " " + source + item.getProductName() + ": " + formatDecimal(item.getTaxedPrice()) + "\n";
+        return "";
     }
 
     private String formatDecimal(BigDecimal value) {

@@ -35,14 +35,12 @@ public class Receipt {
 
     public void add(CartItem cartItem) {
         Tax tax = taxPolicy.forItem(cartItem);
-        BigDecimal taxAmount = tax.dutyAmount(cartItem.getNetPrice()).multiply(BigDecimal.valueOf(cartItem.getQuantity()));
-        BigDecimal taxedAmount = cartItem.getNetPrice().multiply(BigDecimal.valueOf(cartItem.getQuantity())).add(taxAmount);
 
         ReceiptItem receiptItem = ReceiptItem.from(cartItem, tax);
         items.add(receiptItem);
 
-        total = total.add(taxedAmount);
-        salesTaxes = salesTaxes.add(taxAmount);
+        total = total.add(receiptItem.getTaxedPrice());
+        salesTaxes = salesTaxes.add(receiptItem.getTaxDuty());
     }
 
 }

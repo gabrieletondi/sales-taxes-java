@@ -15,10 +15,6 @@ public class FixedTaxAmountPolicy implements TaxPolicy {
     }
 
     public Tax forItem(CartItem item) {
-        return new Tax() {
-            public BigDecimal dutyAmount(BigDecimal netPrice) {
-                return taxAmount;
-            }
-        };
+        return new FixedTaxAmount(taxAmount);
     }
 }
