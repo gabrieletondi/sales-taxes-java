@@ -44,7 +44,7 @@ public class NeverlandTaxPolicyFactoryTest {
 
     @Test
     public void medicalProductsAreExempt() throws Exception {
-        SaleItem item = new SaleItem("headache pills", BigDecimal.TEN, 1, false);
+        SaleItem item = new SaleItem("packet of headache pills", BigDecimal.TEN, 1, false);
         Tax tax = policy.forItem(item);
         assertEquals(PercentageTax.EXEMPT, tax);
     }

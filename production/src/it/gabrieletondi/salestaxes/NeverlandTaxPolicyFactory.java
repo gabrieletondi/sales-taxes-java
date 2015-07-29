@@ -10,7 +10,7 @@ public class NeverlandTaxPolicyFactory {
         specificRules.put("chocolate bar", PercentageTax.EXEMPT);
         specificRules.put("box of chocolates", PercentageTax.EXEMPT);
         specificRules.put("book", PercentageTax.EXEMPT);
-        specificRules.put("headache pills", PercentageTax.EXEMPT);
+        specificRules.put("packet of headache pills", PercentageTax.EXEMPT);
 
         return new InMemoryWithDefaultTaxPolicy(defaultTax, specificRules);
     }
