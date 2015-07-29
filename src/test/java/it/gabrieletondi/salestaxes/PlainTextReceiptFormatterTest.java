@@ -11,9 +11,9 @@ public class PlainTextReceiptFormatterTest {
     @Test
     public void multipleLinesReceipt() throws Exception {
         Receipt receipt = new Receipt(NeverlandTaxPolicyFactory.build());
-        SaleItem firstItem = new SaleItem("item1", new BigDecimal("10.02"), 1, true);
+        ShelfItem firstItem = new ShelfItem("item1", new BigDecimal("10.02"), 1, true);
         receipt.add(firstItem);
-        SaleItem secondItem = new SaleItem("item2", new BigDecimal("2.30"), 1, false);
+        ShelfItem secondItem = new ShelfItem("item2", new BigDecimal("2.30"), 1, false);
         receipt.add(secondItem);
 
         PlainTextReceiptFormatter formatter = new PlainTextReceiptFormatter();

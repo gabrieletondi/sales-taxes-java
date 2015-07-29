@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class SaleItem {
+public class ShelfItem {
     public static final String COMMAND_PATTERN = "^(\\d+)\\s([a-zA-Z\\s]*)\\sat\\s(\\d+\\.\\d{2}?)";
 
     private final String productName;
@@ -28,14 +28,14 @@ public class SaleItem {
         return isImported;
     }
 
-    public SaleItem(String productName, BigDecimal netPrice, int quantity, boolean isImported) {
+    public ShelfItem(String productName, BigDecimal netPrice, int quantity, boolean isImported) {
         this.productName = productName;
         this.netPrice = netPrice;
         this.quantity = quantity;
         this.isImported = isImported;
     }
 
-    public static SaleItem fromSellCommand(String sellCommand) {
+    public static ShelfItem fromSellCommand(String sellCommand) {
         Pattern pattern = Pattern.compile(COMMAND_PATTERN);
         Matcher matcher = pattern.matcher(sellCommand);
 
@@ -48,7 +48,7 @@ public class SaleItem {
         if (isImported)
             productName = sanitizeImportedProductName(productName);
 
-        return new SaleItem(productName, netPrice, Integer.parseInt(quantity), isImported);
+        return new ShelfItem(productName, netPrice, Integer.parseInt(quantity), isImported);
     }
 
     private static String sanitizeImportedProductName(String productName) {

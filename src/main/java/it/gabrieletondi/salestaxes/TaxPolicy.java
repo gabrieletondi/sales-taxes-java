@@ -13,7 +13,7 @@ public class TaxPolicy {
         this.importedTax = importedTax;
     }
 
-    public Tax forItem(SaleItem item) {
+    public Tax forItem(ShelfItem item) {
         Tax tax = forItemName(item.getProductName());
 
         if (!item.isImported())

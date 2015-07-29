@@ -11,8 +11,8 @@ public class POS {
     }
 
     public void onSellCommand(String sellCommand) {
-        SaleItem saleItem = SaleItem.fromSellCommand(sellCommand);
-        receipt.add(saleItem);
+        ShelfItem shelfItem = ShelfItem.fromSellCommand(sellCommand);
+        receipt.add(shelfItem);
     }
 
     public void onSaleComplete() {

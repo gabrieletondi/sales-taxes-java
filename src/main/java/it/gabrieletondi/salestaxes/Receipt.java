@@ -29,12 +29,12 @@ public class Receipt {
         this.items = new ArrayList<ReceiptItem>();
     }
 
-    public void add(SaleItem saleItem) {
-        Tax tax = taxPolicy.forItem(saleItem);
-        BigDecimal taxAmount = tax.dutyAmount(saleItem.getNetPrice()).multiply(BigDecimal.valueOf(saleItem.getQuantity()));
-        BigDecimal taxedAmount = saleItem.getNetPrice().multiply(BigDecimal.valueOf(saleItem.getQuantity())).add(taxAmount);
+    public void add(ShelfItem shelfItem) {
+        Tax tax = taxPolicy.forItem(shelfItem);
+        BigDecimal taxAmount = tax.dutyAmount(shelfItem.getNetPrice()).multiply(BigDecimal.valueOf(shelfItem.getQuantity()));
+        BigDecimal taxedAmount = shelfItem.getNetPrice().multiply(BigDecimal.valueOf(shelfItem.getQuantity())).add(taxAmount);
 
-        ReceiptItem receiptItem = new ReceiptItem(saleItem.getProductName(), saleItem.getQuantity(), taxedAmount, saleItem.isImported());
+        ReceiptItem receiptItem = new ReceiptItem(shelfItem.getProductName(), shelfItem.getQuantity(), taxedAmount, shelfItem.isImported());
         items.add(receiptItem);
 
         total = total.add(taxedAmount);

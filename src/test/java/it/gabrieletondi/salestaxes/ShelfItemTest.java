@@ -7,11 +7,11 @@ import java.math.BigDecimal;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class SaleItemTest {
+public class ShelfItemTest {
 
     @Test
     public void singleWordItem() throws Exception {
-        SaleItem item = SaleItem.fromSellCommand("1 book at 12.49");
+        ShelfItem item = ShelfItem.fromSellCommand("1 book at 12.49");
 
         assertEquals(1, item.getQuantity());
         assertEquals("book", item.getProductName());
@@ -20,7 +20,7 @@ public class SaleItemTest {
 
     @Test
     public void multipleWordItem() throws Exception {
-        SaleItem item = SaleItem.fromSellCommand("1 item with multiple words at 12.49");
+        ShelfItem item = ShelfItem.fromSellCommand("1 item with multiple words at 12.49");
 
         assertEquals(1, item.getQuantity());
         assertEquals("item with multiple words", item.getProductName());
@@ -29,7 +29,7 @@ public class SaleItemTest {
 
     @Test
     public void importedItem() throws Exception {
-        SaleItem item = SaleItem.fromSellCommand("1 box of imported chocolates at 11.25");
+        ShelfItem item = ShelfItem.fromSellCommand("1 box of imported chocolates at 11.25");
 
         assertEquals(1, item.getQuantity());
         assertEquals("box of chocolates", item.getProductName());
@@ -39,7 +39,7 @@ public class SaleItemTest {
 
     @Test
     public void importedItemStartingWithImported() throws Exception {
-        SaleItem item = SaleItem.fromSellCommand("1 imported bottle of perfume at 32.19");
+        ShelfItem item = ShelfItem.fromSellCommand("1 imported bottle of perfume at 32.19");
 
         assertEquals(1, item.getQuantity());
         assertEquals("bottle of perfume", item.getProductName());
@@ -49,7 +49,7 @@ public class SaleItemTest {
 
     @Test
     public void multipleDigitQuantity() throws Exception {
-        SaleItem item = SaleItem.fromSellCommand("1355 book at 12.49");
+        ShelfItem item = ShelfItem.fromSellCommand("1355 book at 12.49");
 
         assertEquals(1355, item.getQuantity());
         assertEquals("book", item.getProductName());
