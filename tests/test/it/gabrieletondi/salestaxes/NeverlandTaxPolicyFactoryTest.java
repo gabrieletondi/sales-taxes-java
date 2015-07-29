@@ -9,7 +9,7 @@ import static org.junit.Assert.assertEquals;
 
 public class NeverlandTaxPolicyFactoryTest {
 
-    private InMemoryWithDefaultTaxPolicy policy;
+    private TaxPolicy policy;
 
     @Before
     public void setUp() {

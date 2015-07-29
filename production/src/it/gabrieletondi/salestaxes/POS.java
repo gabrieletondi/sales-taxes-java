@@ -7,7 +7,7 @@ public class POS {
 
     private Basket basket;
 
-    public POS(InMemoryWithDefaultTaxPolicy taxPolicy) {
+    public POS(TaxPolicy taxPolicy) {
         this.basket = new Basket(taxPolicy);
     }
 

@@ -5,39 +5,17 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class POSTest {
+public class AcceptanceTest {
 
-    private TaxPolicy taxPolicy;
     private POS pos;
 
     @Before
-    public void setUp() {
-        taxPolicy = NeverlandTaxPolicyFactory.build();
-        pos = new POS(taxPolicy);
+    public void setUp() throws Exception {
+        pos = new POS(NeverlandTaxPolicyFactory.build());
     }
 
     @Test
-    public void sellOneTaxFreeNotImportedItem() throws Exception {
-        pos.sell("1 book at 12.49");
-
-        String expected = "1 book: 12.49\n" +
-                "Sales Taxes: 0.00\n" +
-                "Total: 12.49";
-        assertEquals(expected, pos.receipt());
-    }
-
-    @Test
-    public void sellOneStandardTaxNotImportedItem() throws Exception {
-        pos.sell("1 musical CD at 14.99");
-
-        String expected = "1 musical CD: 16.49\n" +
-                "Sales Taxes: 1.50\n" +
-                "Total: 16.49";
-        assertEquals(expected, pos.receipt());
-    }
-
-    @Test
-    public void sellMultipleNotImportedItems() throws Exception {
+    public void input1() throws Exception {
         pos.sell("1 book at 12.49");
         pos.sell("1 music CD at 14.99");
         pos.sell("1 chocolate bar at 0.85");
@@ -47,21 +25,12 @@ public class POSTest {
                 "1 chocolate bar: 0.85\n" +
                 "Sales Taxes: 1.50\n" +
                 "Total: 29.83";
+
         assertEquals(expected, pos.receipt());
     }
 
     @Test
-    public void sellOneImportedItemWithStandardTax() throws Exception {
-        pos.sell("1 imported bottle of perfume at 47.50");
-
-        String expected = "1 imported bottle of perfume: 54.65\n" +
-                "Sales Taxes: 7.15\n" +
-                "Total: 54.65";
-        assertEquals(expected, pos.receipt());
-    }
-
-    @Test
-    public void sellMultipleImportedItems() throws Exception {
+    public void input2() throws Exception {
         pos.sell("1 imported box of chocolates at 10.00");
         pos.sell("1 imported bottle of perfume at 47.50");
 
@@ -74,7 +43,7 @@ public class POSTest {
     }
 
     @Test
-    public void sellMultipleMixedItems() throws Exception {
+    public void input3() throws Exception {
         pos.sell("1 imported bottle of perfume at 27.99");
         pos.sell("1 bottle of perfume at 18.99");
         pos.sell("1 packet of headache pills at 9.75");

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Basket {
-    private final InMemoryWithDefaultTaxPolicy taxPolicy;
+    private final TaxPolicy taxPolicy;
     private BigDecimal total;
     private BigDecimal salesTaxes;
     private List<BasketItem> items;
@@ -18,7 +18,7 @@ public class Basket {
         return salesTaxes;
     }
 
-    public Basket(InMemoryWithDefaultTaxPolicy taxPolicy) {
+    public Basket(TaxPolicy taxPolicy) {
         this.taxPolicy = taxPolicy;
         this.total = BigDecimal.ZERO;
         this.salesTaxes = BigDecimal.ZERO;

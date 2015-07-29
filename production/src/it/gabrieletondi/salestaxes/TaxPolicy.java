@@ -2,13 +2,15 @@ package it.gabrieletondi.salestaxes;
 
 import java.util.Map;
 
-public class InMemoryWithDefaultTaxPolicy {
+public class TaxPolicy {
     private final PercentageTax defaultTax;
     private final Map<String, PercentageTax> specificRules;
+    private final PercentageTax importedTax;
 
-    public InMemoryWithDefaultTaxPolicy(PercentageTax defaultTax, Map<String, PercentageTax> specificRules) {
+    public TaxPolicy(PercentageTax defaultTax, Map<String, PercentageTax> specificRules, PercentageTax importedTax) {
         this.defaultTax = defaultTax;
         this.specificRules = specificRules;
+        this.importedTax = importedTax;
     }
 
     private PercentageTax forItemName(String itemName) {
@@ -24,6 +26,6 @@ public class InMemoryWithDefaultTaxPolicy {
         if (!item.isImported())
             return tax;
 
-        return new CompositeTax(tax, PercentageTax.withRate(5, new NearestToFiveCentsRounding()));
+        return new CompositeTax(tax, importedTax);
     }
 }
