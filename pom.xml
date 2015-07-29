@@ -10,7 +10,6 @@
     <version>1.0</version>
     <modules>
         <module>production</module>
-        <module>tests</module>
     </modules>
 
 </project>

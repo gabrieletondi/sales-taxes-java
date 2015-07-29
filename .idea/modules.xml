@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/production/production.iml" filepath="$PROJECT_DIR$/production/production.iml" />
       <module fileurl="file://$PROJECT_DIR$/salextaxes.iml" filepath="$PROJECT_DIR$/salextaxes.iml" />
-      <module fileurl="file://$PROJECT_DIR$/tests/tests.iml" filepath="$PROJECT_DIR$/tests/tests.iml" />
     </modules>
   </component>
 </project>

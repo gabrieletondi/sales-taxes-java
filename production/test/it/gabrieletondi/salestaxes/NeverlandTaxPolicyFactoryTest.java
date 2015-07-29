@@ -1,5 +1,6 @@
 package it.gabrieletondi.salestaxes;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -21,7 +22,7 @@ public class NeverlandTaxPolicyFactoryTest {
         SaleItem item = new SaleItem("any standard item", BigDecimal.TEN, 1, false);
         Tax tax = policy.forItem(item);
 
-        assertEquals(PercentageTax.withRate(10, new NearestToFiveCentsRounding()), tax);
+        Assert.assertEquals(PercentageTax.withRate(10, new NearestToFiveCentsRounding()), tax);
     }
 
     @Test
