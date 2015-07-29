@@ -16,7 +16,7 @@ public class TaxPolicyTest {
     public void defaultRate() throws Exception {
         TaxPolicy policy = new TaxPolicy(DEFAULT_TAX, new HashMap<String, PercentageTax>(), IMPORTED_TAX);
 
-        ShelfItem item = new ShelfItem("default rate item", null, 1, false);
+        ShelfItem item = new ShelfItem("default rate item", null, 1, false, null);
         Tax actualTax = policy.forItem(item);
 
         assertEquals(DEFAULT_TAX, actualTax);
@@ -28,7 +28,7 @@ public class TaxPolicyTest {
         specificRules.put("specific product", SPECIFIC_TAX);
         TaxPolicy policy = new TaxPolicy(DEFAULT_TAX, specificRules, IMPORTED_TAX);
 
-        ShelfItem item = new ShelfItem("specific product", null, 1, false);
+        ShelfItem item = new ShelfItem("specific product", null, 1, false, null);
         Tax actualTax = policy.forItem(item);
 
         assertEquals(SPECIFIC_TAX, actualTax);
@@ -38,7 +38,7 @@ public class TaxPolicyTest {
     public void additionalTaxOnImportedItems() throws Exception {
         TaxPolicy policy = new TaxPolicy(DEFAULT_TAX, new HashMap<String, PercentageTax>(), IMPORTED_TAX);
 
-        ShelfItem item = new ShelfItem("default rate item", null, 1, true);
+        ShelfItem item = new ShelfItem("default rate item", null, 1, true, null);
         Tax actualTax = policy.forItem(item);
 
         assertEquals(new CompositeTax(DEFAULT_TAX, IMPORTED_TAX), actualTax);

@@ -14,7 +14,7 @@ public class POSTest {
     @Before
     public void setUp() {
         display = new InMemoryDisplay();
-        pos = new POS(NeverlandTaxPolicyFactory.build(), display);
+        pos = new POS(NeverlandTaxPolicyFactory.build(), display, NeverlandCategoryRepositoryFactory.build());
     }
 
     @Test

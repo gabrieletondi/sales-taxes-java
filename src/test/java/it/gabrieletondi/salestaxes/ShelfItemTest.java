@@ -1,5 +1,7 @@
 package it.gabrieletondi.salestaxes;
 
+import it.gabrieletondi.salestaxes.doubles.AllOfAKindCategoryRepository;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -9,18 +11,26 @@ import static org.junit.Assert.assertTrue;
 
 public class ShelfItemTest {
 
+    private CategoryRepository categoryRepository;
+
+    @Before
+    public void setUp() throws Exception {
+        categoryRepository = new AllOfAKindCategoryRepository(Category.MISC);
+    }
+
     @Test
     public void singleWordItem() throws Exception {
-        ShelfItem item = ShelfItem.fromSellCommand("1 book at 12.49");
+        ShelfItem item = ShelfItem.fromSellCommand("1 book at 12.49", categoryRepository);
 
         assertEquals(1, item.getQuantity());
         assertEquals("book", item.getProductName());
         assertEquals(new BigDecimal("12.49"), item.getNetPrice());
+        assertEquals(Category.MISC, item.getCategory());
     }
 
     @Test
     public void multipleWordItem() throws Exception {
-        ShelfItem item = ShelfItem.fromSellCommand("1 item with multiple words at 12.49");
+        ShelfItem item = ShelfItem.fromSellCommand("1 item with multiple words at 12.49", categoryRepository);
 
         assertEquals(1, item.getQuantity());
         assertEquals("item with multiple words", item.getProductName());
@@ -29,7 +39,7 @@ public class ShelfItemTest {
 
     @Test
     public void importedItem() throws Exception {
-        ShelfItem item = ShelfItem.fromSellCommand("1 box of imported chocolates at 11.25");
+        ShelfItem item = ShelfItem.fromSellCommand("1 box of imported chocolates at 11.25", categoryRepository);
 
         assertEquals(1, item.getQuantity());
         assertEquals("box of chocolates", item.getProductName());
@@ -39,7 +49,7 @@ public class ShelfItemTest {
 
     @Test
     public void importedItemStartingWithImported() throws Exception {
-        ShelfItem item = ShelfItem.fromSellCommand("1 imported bottle of perfume at 32.19");
+        ShelfItem item = ShelfItem.fromSellCommand("1 imported bottle of perfume at 32.19", categoryRepository);
 
         assertEquals(1, item.getQuantity());
         assertEquals("bottle of perfume", item.getProductName());
@@ -49,7 +59,7 @@ public class ShelfItemTest {
 
     @Test
     public void multipleDigitQuantity() throws Exception {
-        ShelfItem item = ShelfItem.fromSellCommand("1355 book at 12.49");
+        ShelfItem item = ShelfItem.fromSellCommand("1355 book at 12.49", categoryRepository);
 
         assertEquals(1355, item.getQuantity());
         assertEquals("book", item.getProductName());

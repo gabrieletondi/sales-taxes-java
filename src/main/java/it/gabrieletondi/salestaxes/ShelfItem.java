@@ -11,6 +11,7 @@ public class ShelfItem {
     private final BigDecimal netPrice;
     private final int quantity;
     private boolean isImported;
+    private Category category;
 
     public String getProductName() {
         return productName;
@@ -28,14 +29,19 @@ public class ShelfItem {
         return isImported;
     }
 
-    public ShelfItem(String productName, BigDecimal netPrice, int quantity, boolean isImported) {
+    public Category getCategory() {
+        return category;
+    }
+
+    public ShelfItem(String productName, BigDecimal netPrice, int quantity, boolean isImported, Category category) {
         this.productName = productName;
         this.netPrice = netPrice;
         this.quantity = quantity;
         this.isImported = isImported;
+        this.category = category;
     }
 
-    public static ShelfItem fromSellCommand(String sellCommand) {
+    public static ShelfItem fromSellCommand(String sellCommand, CategoryRepository categoryRepository) {
         Pattern pattern = Pattern.compile(COMMAND_PATTERN);
         Matcher matcher = pattern.matcher(sellCommand);
 
@@ -48,7 +54,9 @@ public class ShelfItem {
         if (isImported)
             productName = sanitizeImportedProductName(productName);
 
-        return new ShelfItem(productName, netPrice, Integer.parseInt(quantity), isImported);
+        Category category = categoryRepository.ofProduct(productName);
+
+        return new ShelfItem(productName, netPrice, Integer.parseInt(quantity), isImported, category);
     }
 
     private static String sanitizeImportedProductName(String productName) {
@@ -60,6 +68,5 @@ public class ShelfItem {
     private static boolean isImported(String productName) {
         return productName.contains("imported");
     }
-
 
 }

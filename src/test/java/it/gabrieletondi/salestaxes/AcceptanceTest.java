@@ -14,7 +14,7 @@ public class AcceptanceTest {
     @Before
     public void setUp() throws Exception {
         display = new InMemoryDisplay();
-        pos = new POS(NeverlandTaxPolicyFactory.build(), display);
+        pos = new POS(NeverlandTaxPolicyFactory.build(), display, NeverlandCategoryRepositoryFactory.build());
     }
 
     @Test
