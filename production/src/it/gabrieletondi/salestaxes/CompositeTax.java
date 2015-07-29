@@ -13,7 +13,7 @@ public class CompositeTax implements Tax {
     public BigDecimal dutyAmount(BigDecimal netPrice) {
         BigDecimal dutyAmount = BigDecimal.ZERO;
 
-        for(Tax tax:taxes)
+        for (Tax tax:taxes)
             dutyAmount = dutyAmount.add(tax.dutyAmount(netPrice));
 
         return dutyAmount;
