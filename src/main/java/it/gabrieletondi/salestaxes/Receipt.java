@@ -31,8 +31,8 @@ public class Receipt {
 
     public void add(SaleItem saleItem) {
         Tax tax = taxPolicy.forItem(saleItem);
-        BigDecimal taxAmount = tax.dutyAmount(saleItem.getNetPrice());
-        BigDecimal taxedAmount = saleItem.getNetPrice().add(taxAmount);
+        BigDecimal taxAmount = tax.dutyAmount(saleItem.getNetPrice()).multiply(BigDecimal.valueOf(saleItem.getQuantity()));
+        BigDecimal taxedAmount = saleItem.getNetPrice().multiply(BigDecimal.valueOf(saleItem.getQuantity())).add(taxAmount);
 
         ReceiptItem receiptItem = new ReceiptItem(saleItem.getProductName(), saleItem.getQuantity(), taxedAmount, saleItem.isImported());
         items.add(receiptItem);

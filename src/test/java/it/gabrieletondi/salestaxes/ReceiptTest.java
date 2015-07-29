@@ -26,7 +26,7 @@ public class ReceiptTest {
 
     @Test
     public void addItemsToReceipt() throws Exception {
-        receipt.add(new SaleItem("product 1", new BigDecimal("3.44"), 1, false));
+        receipt.add(new SaleItem("product 1", new BigDecimal("3.44"), 2, false));
         receipt.add(new SaleItem("product 2", new BigDecimal("0.35"), 1, true));
 
         List<ReceiptItem> items = receipt.getItems();
@@ -35,8 +35,8 @@ public class ReceiptTest {
         ReceiptItem firstItem = items.get(0);
         ReceiptItem secondItem = items.get(1);
 
-        assertEquals(new BigDecimal("3.79"), firstItem.getTaxedPrice());
-        assertEquals(1, firstItem.getQuantity());
+        assertEquals(new BigDecimal("7.58"), firstItem.getTaxedPrice());
+        assertEquals(2, firstItem.getQuantity());
         assertEquals("product 1", firstItem.getProductName());
 
         assertEquals(new BigDecimal("0.45"), secondItem.getTaxedPrice());
@@ -47,10 +47,10 @@ public class ReceiptTest {
 
     @Test
     public void calculatesTotals() throws Exception {
-        receipt.add(new SaleItem("product 1", new BigDecimal("12.34"), 1, false));
+        receipt.add(new SaleItem("product 1", new BigDecimal("12.34"), 2, false));
         receipt.add(new SaleItem("product 2", new BigDecimal("2.23"), 1, false));
 
-        assertEquals(new BigDecimal("16.07"), receipt.getTotal());
-        assertEquals(new BigDecimal("1.50"), receipt.getSalesTaxes());
+        assertEquals(new BigDecimal("29.66"), receipt.getTotal());
+        assertEquals(new BigDecimal("2.75"), receipt.getSalesTaxes());
     }
 }
