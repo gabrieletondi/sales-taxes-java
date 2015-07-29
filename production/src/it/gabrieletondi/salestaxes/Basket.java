@@ -26,11 +26,11 @@ public class Basket {
     }
 
     public void add(SaleItem saleItem) {
-        Tax tax = taxPolicy.forItemName(saleItem.getProductName());
+        Tax tax = taxPolicy.forItem(saleItem);
         BigDecimal taxAmount = tax.dutyAmount(saleItem.getNetPrice());
         BigDecimal taxedAmount = saleItem.getNetPrice().add(taxAmount);
 
-        BasketItem basketItem = new BasketItem(saleItem.getProductName(), saleItem.getQuantity(), taxedAmount);
+        BasketItem basketItem = new BasketItem(saleItem.getProductName(), saleItem.getQuantity(), taxedAmount, saleItem.isImported());
         items.add(basketItem);
 
         total = total.add(taxedAmount);

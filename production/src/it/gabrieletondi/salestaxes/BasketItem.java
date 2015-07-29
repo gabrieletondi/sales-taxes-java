@@ -6,6 +6,7 @@ public class BasketItem {
     private final BigDecimal taxedPrice;
     private int quantity;
     private String productName;
+    private boolean isImported;
 
     public BigDecimal getTaxedPrice() {
         return taxedPrice;
@@ -19,9 +20,14 @@ public class BasketItem {
         return productName;
     }
 
-    public BasketItem(String productName, int quantity, BigDecimal taxedPrice) {
+    public BasketItem(String productName, int quantity, BigDecimal taxedPrice, boolean isImported) {
         this.taxedPrice = taxedPrice;
         this.quantity = quantity;
         this.productName = productName;
+        this.isImported = isImported;
+    }
+
+    public boolean isImported() {
+        return isImported;
     }
 }

@@ -1,44 +1,60 @@
 package it.gabrieletondi.salestaxes;
 
+import org.junit.Before;
 import org.junit.Test;
+
+import java.math.BigDecimal;
 
 import static org.junit.Assert.assertEquals;
 
 public class NeverlandTaxPolicyFactoryTest {
 
+    private InMemoryWithDefaultTaxPolicy policy;
+
+    @Before
+    public void setUp() {
+        policy = NeverlandTaxPolicyFactory.build();
+    }
+
     @Test
     public void defaultRateIs10() throws Exception {
-        InMemoryWithDefaultTaxPolicy policy = NeverlandTaxPolicyFactory.build();
+        SaleItem item = new SaleItem("any standard item", BigDecimal.TEN, 1, false);
+        Tax tax = policy.forItem(item);
 
-        Tax tax = policy.forItemName("any standard item");
-
-        assertEquals(Tax.withRate(10, new NearestToFiveCentsRounding()), tax);
+        assertEquals(PercentageTax.withRate(10, new NearestToFiveCentsRounding()), tax);
     }
 
     @Test
     public void foodIsExempt() throws Exception {
-        InMemoryWithDefaultTaxPolicy policy = NeverlandTaxPolicyFactory.build();
+        SaleItem item = new SaleItem("chocolate bar", BigDecimal.TEN, 1, false);
+        Tax tax = policy.forItem(item);
+        assertEquals(PercentageTax.EXEMPT, tax);
 
-        Tax tax = policy.forItemName("chocolate bar");
-        assertEquals(Tax.EXEMPT, tax);
-
-        tax = policy.forItemName("box of chocolates");
-        assertEquals(Tax.EXEMPT, tax);
+        item = new SaleItem("box of chocolates", BigDecimal.TEN, 1, false);
+        tax = policy.forItem(item);
+        assertEquals(PercentageTax.EXEMPT, tax);
     }
 
     @Test
     public void booksAreExempt() throws Exception {
-        InMemoryWithDefaultTaxPolicy policy = NeverlandTaxPolicyFactory.build();
-
-        Tax tax = policy.forItemName("book");
-        assertEquals(Tax.EXEMPT, tax);
+        SaleItem item = new SaleItem("book", BigDecimal.TEN, 1, false);
+        Tax tax = policy.forItem(item);
+        assertEquals(PercentageTax.EXEMPT, tax);
     }
 
     @Test
     public void medicalProductsAreExempt() throws Exception {
-        InMemoryWithDefaultTaxPolicy policy = NeverlandTaxPolicyFactory.build();
+        SaleItem item = new SaleItem("headache pills", BigDecimal.TEN, 1, false);
+        Tax tax = policy.forItem(item);
+        assertEquals(PercentageTax.EXEMPT, tax);
+    }
 
-        Tax tax = policy.forItemName("headache pills");
-        assertEquals(Tax.EXEMPT, tax);
+    @Test
+    public void importedItemsHaveAdditionalTax() throws Exception {
+        SaleItem item = new SaleItem("any standard item", BigDecimal.TEN, 1, true);
+        Tax tax = policy.forItem(item);
+
+        Tax expectedTax = new CompositeTax(PercentageTax.withRate(10, new NearestToFiveCentsRounding()), PercentageTax.withRate(5, new NearestToFiveCentsRounding()));
+        assertEquals(expectedTax, tax);
     }
 }

@@ -20,12 +20,21 @@ public class POS {
         String receipt = "";
 
         for(BasketItem item : basket.getItems())
-            receipt += item.getQuantity() + " " + item.getProductName() + ": " + formatDecimal(item.getTaxedPrice()) + "\n";
+            receipt += formatReceiptItem(item);
 
         receipt += "Sales Taxes: " + formatDecimal(basket.getSalesTaxes()) + "\n" +
                 "Total: " + formatDecimal(basket.getTotal());
 
         return receipt;
+    }
+
+    private String formatReceiptItem(BasketItem item) {
+        String source = "";
+
+        if (item.isImported())
+            source = "imported ";
+
+        return item.getQuantity() + " " + source + item.getProductName() + ": " + formatDecimal(item.getTaxedPrice()) + "\n";
     }
 
     private String formatDecimal(BigDecimal value) {
