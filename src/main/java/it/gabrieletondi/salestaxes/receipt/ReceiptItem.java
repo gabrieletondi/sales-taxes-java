@@ -1,5 +1,8 @@
 package it.gabrieletondi.salestaxes.receipt;
 
+import it.gabrieletondi.salestaxes.catalog.CartItem;
+import it.gabrieletondi.salestaxes.tax.Tax;
+
 import java.math.BigDecimal;
 
 public class ReceiptItem {
@@ -29,5 +32,11 @@ public class ReceiptItem {
         this.quantity = quantity;
         this.productName = productName;
         this.isImported = isImported;
+    }
+
+    public static ReceiptItem from(CartItem cartItem, Tax tax) {
+        BigDecimal dutyAmount = tax.dutyAmount(cartItem.getNetPrice()).multiply(BigDecimal.valueOf(cartItem.getQuantity()));
+        BigDecimal taxedAmount = cartItem.getNetPrice().multiply(BigDecimal.valueOf(cartItem.getQuantity())).add(dutyAmount).setScale(2);
+        return new ReceiptItem(cartItem.getProductName(), cartItem.getQuantity(), taxedAmount, cartItem.isImported());
     }
 }

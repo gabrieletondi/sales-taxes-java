@@ -1,7 +1,7 @@
 package it.gabrieletondi.salestaxes.receipt;
 
 import it.gabrieletondi.salestaxes.catalog.CartItem;
-import it.gabrieletondi.salestaxes.tax.NeverlandTaxPolicyFactory;
+import it.gabrieletondi.salestaxes.doubles.FixedTaxAmountPolicy;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -9,7 +9,6 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class ReceiptTest {
 
@@ -17,7 +16,7 @@ public class ReceiptTest {
 
     @Before
     public void setUp() throws Exception {
-        receipt = new Receipt(NeverlandTaxPolicyFactory.build());
+        receipt = new Receipt(new FixedTaxAmountPolicy(BigDecimal.ONE));
     }
 
     @Test
@@ -28,8 +27,8 @@ public class ReceiptTest {
 
     @Test
     public void addItemsToReceipt() throws Exception {
-        receipt.add(new CartItem("product 1", new BigDecimal("3.44"), 2, false, null));
-        receipt.add(new CartItem("product 2", new BigDecimal("0.35"), 1, true, null));
+        receipt.add(new CartItem("product 1", BigDecimal.ONE, 0, false, null));
+        receipt.add(new CartItem("product 2", BigDecimal.ONE, 0, false, null));
 
         List<ReceiptItem> items = receipt.getItems();
 
@@ -37,14 +36,8 @@ public class ReceiptTest {
         ReceiptItem firstItem = items.get(0);
         ReceiptItem secondItem = items.get(1);
 
-        assertEquals(new BigDecimal("7.58"), firstItem.getTaxedPrice());
-        assertEquals(2, firstItem.getQuantity());
         assertEquals("product 1", firstItem.getProductName());
-
-        assertEquals(new BigDecimal("0.45"), secondItem.getTaxedPrice());
-        assertEquals(1, secondItem.getQuantity());
         assertEquals("product 2", secondItem.getProductName());
-        assertTrue(secondItem.isImported());
     }
 
     @Test
@@ -52,7 +45,7 @@ public class ReceiptTest {
         receipt.add(new CartItem("product 1", new BigDecimal("12.34"), 2, false, null));
         receipt.add(new CartItem("product 2", new BigDecimal("2.23"), 1, false, null));
 
-        assertEquals(new BigDecimal("29.66"), receipt.getTotal());
-        assertEquals(new BigDecimal("2.75"), receipt.getSalesTaxes());
+        assertEquals(new BigDecimal("29.91"), receipt.getTotal());
+        assertEquals(new BigDecimal("3"), receipt.getSalesTaxes());
     }
 }
