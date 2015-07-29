@@ -22,7 +22,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="production" />
+        <module name="salextaxes" />
         <module name="tests" />
       </profile>
     </annotationProcessing>
