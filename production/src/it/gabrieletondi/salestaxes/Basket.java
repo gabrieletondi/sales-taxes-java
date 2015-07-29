@@ -18,6 +18,10 @@ public class Basket {
         return salesTaxes;
     }
 
+    public List<BasketItem> getItems() {
+        return items;
+    }
+
     public Basket(TaxPolicy taxPolicy) {
         this.taxPolicy = taxPolicy;
         this.total = BigDecimal.ZERO;
@@ -37,7 +41,4 @@ public class Basket {
         salesTaxes = salesTaxes.add(taxAmount);
     }
 
-    public List<BasketItem> getItems() {
-        return items;
-    }
 }

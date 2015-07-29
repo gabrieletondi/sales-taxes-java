@@ -13,13 +13,6 @@ public class TaxPolicy {
         this.importedTax = importedTax;
     }
 
-    private PercentageTax forItemName(String itemName) {
-        if (specificRules.containsKey(itemName))
-            return specificRules.get(itemName);
-
-        return defaultTax;
-    }
-
     public Tax forItem(SaleItem item) {
         Tax tax = forItemName(item.getProductName());
 
@@ -27,5 +20,12 @@ public class TaxPolicy {
             return tax;
 
         return new CompositeTax(tax, importedTax);
+    }
+
+    private PercentageTax forItemName(String itemName) {
+        if (specificRules.containsKey(itemName))
+            return specificRules.get(itemName);
+
+        return defaultTax;
     }
 }

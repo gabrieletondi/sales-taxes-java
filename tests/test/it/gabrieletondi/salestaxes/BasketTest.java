@@ -20,8 +20,6 @@ public class BasketTest {
 
     @Test
     public void emptyBasket() throws Exception {
-        Basket basket = new Basket(NeverlandTaxPolicyFactory.build());
-
         assertEquals(BigDecimal.ZERO, basket.getTotal());
         assertEquals(BigDecimal.ZERO, basket.getSalesTaxes());
     }

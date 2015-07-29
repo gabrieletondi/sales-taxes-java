@@ -5,18 +5,24 @@ import java.text.DecimalFormat;
 
 public class POS {
 
+    private final Display display;
     private Basket basket;
 
-    public POS(TaxPolicy taxPolicy) {
+    public POS(TaxPolicy taxPolicy, Display display) {
+        this.display = display;
         this.basket = new Basket(taxPolicy);
     }
 
-    public void sell(String sellCommand) {
+    public void onSellCommand(String sellCommand) {
         SaleItem saleItem = SaleItem.fromSellCommand(sellCommand);
         basket.add(saleItem);
     }
 
-    public String receipt() {
+    public void onSaleComplete() {
+        display.show(receipt());
+    }
+
+    private String receipt() {
         String receipt = "";
 
         for(BasketItem item : basket.getItems())

@@ -44,12 +44,21 @@ public class SaleItem {
         String productName = matcher.group(2);
         BigDecimal netPrice = new BigDecimal(matcher.group(3));
 
-        boolean isImported = productName.contains("imported");
-        productName = productName.replace("imported", "");
-        productName = productName.replace("  ", " ");
-        productName = productName.trim();
+        boolean isImported = isImported(productName);
+        if (isImported)
+            productName = sanitizeImportedProductName(productName);
 
         return new SaleItem(productName, netPrice, Integer.parseInt(quantity), isImported);
+    }
+
+    private static String sanitizeImportedProductName(String productName) {
+        productName = productName.replace("imported", "");
+        productName = productName.replace("  ", " ");
+        return productName.trim();
+    }
+
+    private static boolean isImported(String productName) {
+        return productName.contains("imported");
     }
 
 

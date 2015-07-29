@@ -2,7 +2,6 @@ package it.gabrieletondi.salestaxes;
 
 import it.gabrieletondi.salestaxes.doubles.FixedValueRounding;
 import org.junit.Test;
-
 import java.math.BigDecimal;
 
 import static org.junit.Assert.assertEquals;

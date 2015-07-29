@@ -20,14 +20,14 @@ public class BasketItem {
         return productName;
     }
 
+    public boolean isImported() {
+        return isImported;
+    }
+
     public BasketItem(String productName, int quantity, BigDecimal taxedPrice, boolean isImported) {
         this.taxedPrice = taxedPrice;
         this.quantity = quantity;
         this.productName = productName;
         this.isImported = isImported;
-    }
-
-    public boolean isImported() {
-        return isImported;
     }
 }
