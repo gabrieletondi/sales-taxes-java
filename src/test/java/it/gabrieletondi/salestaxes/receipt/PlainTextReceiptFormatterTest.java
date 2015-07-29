@@ -1,9 +1,7 @@
-package it.gabrieletondi.salestaxes;
+package it.gabrieletondi.salestaxes.receipt;
 
 import it.gabrieletondi.salestaxes.catalog.ShelfItem;
 import it.gabrieletondi.salestaxes.doubles.NoTaxPolicy;
-import it.gabrieletondi.salestaxes.receipt.PlainTextReceiptFormatter;
-import it.gabrieletondi.salestaxes.receipt.Receipt;
 import org.junit.Test;
 
 import java.math.BigDecimal;
