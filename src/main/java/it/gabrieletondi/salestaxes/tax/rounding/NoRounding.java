@@ -1,6 +1,4 @@
-package it.gabrieletondi.salestaxes.tax;
-
-import it.gabrieletondi.salestaxes.tax.rounding.Rounding;
+package it.gabrieletondi.salestaxes.tax.rounding;
 
 import java.math.BigDecimal;
 

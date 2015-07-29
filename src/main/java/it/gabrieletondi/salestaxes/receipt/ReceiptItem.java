@@ -32,7 +32,7 @@ public class ReceiptItem {
         return taxDuty;
     }
 
-    public ReceiptItem(String productName, int quantity, BigDecimal taxedPrice, boolean isImported, BigDecimal taxDuty) {
+    public ReceiptItem(String productName, BigDecimal taxedPrice, BigDecimal taxDuty, int quantity, boolean isImported) {
         this.taxedPrice = taxedPrice;
         this.quantity = quantity;
         this.productName = productName;
@@ -43,8 +43,7 @@ public class ReceiptItem {
     public static ReceiptItem from(CartItem cartItem, Tax tax) {
         BigDecimal dutyAmount = tax.dutyAmount(cartItem.getNetPrice()).multiply(BigDecimal.valueOf(cartItem.getQuantity()));
         BigDecimal taxedAmount = cartItem.getNetPrice().multiply(BigDecimal.valueOf(cartItem.getQuantity())).add(dutyAmount).setScale(2);
-        return new ReceiptItem(cartItem.getProductName(), cartItem.getQuantity(), taxedAmount, cartItem.isImported(), dutyAmount);
+        return new ReceiptItem(cartItem.getProductName(), taxedAmount, dutyAmount, cartItem.getQuantity(), cartItem.isImported());
     }
-
 
 }

@@ -1,7 +1,7 @@
 package it.gabrieletondi.salestaxes.catalog;
 
 import it.gabrieletondi.salestaxes.catalog.repository.CategoryRepository;
-import it.gabrieletondi.salestaxes.doubles.AllOfAKindCategoryRepository;
+import it.gabrieletondi.salestaxes.doubles.FixedCategoryRepository;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,7 +16,7 @@ public class CartItemTest {
 
     @Before
     public void setUp() throws Exception {
-        categoryRepository = new AllOfAKindCategoryRepository(Category.MISC);
+        categoryRepository = new FixedCategoryRepository(Category.MISC);
     }
 
     @Test

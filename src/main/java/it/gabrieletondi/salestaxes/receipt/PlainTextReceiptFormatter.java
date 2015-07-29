@@ -7,7 +7,7 @@ public class PlainTextReceiptFormatter {
     public String format(Receipt receipt) {
         StringBuilder result = new StringBuilder();
 
-        for(ReceiptItem item : receipt.getItems())
+        for (ReceiptItem item : receipt.getItems())
             result.append(formatReceiptItem(item));
 
         result.append(formatTail(receipt));
