@@ -4,11 +4,11 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Basket {
+public class Receipt {
     private final TaxPolicy taxPolicy;
     private BigDecimal total;
     private BigDecimal salesTaxes;
-    private List<BasketItem> items;
+    private List<ReceiptItem> items;
 
     public BigDecimal getTotal() {
         return total;
@@ -18,15 +18,15 @@ public class Basket {
         return salesTaxes;
     }
 
-    public List<BasketItem> getItems() {
+    public List<ReceiptItem> getItems() {
         return items;
     }
 
-    public Basket(TaxPolicy taxPolicy) {
+    public Receipt(TaxPolicy taxPolicy) {
         this.taxPolicy = taxPolicy;
         this.total = BigDecimal.ZERO;
         this.salesTaxes = BigDecimal.ZERO;
-        this.items = new ArrayList<BasketItem>();
+        this.items = new ArrayList<ReceiptItem>();
     }
 
     public void add(SaleItem saleItem) {
@@ -34,8 +34,8 @@ public class Basket {
         BigDecimal taxAmount = tax.dutyAmount(saleItem.getNetPrice());
         BigDecimal taxedAmount = saleItem.getNetPrice().add(taxAmount);
 
-        BasketItem basketItem = new BasketItem(saleItem.getProductName(), saleItem.getQuantity(), taxedAmount, saleItem.isImported());
-        items.add(basketItem);
+        ReceiptItem receiptItem = new ReceiptItem(saleItem.getProductName(), saleItem.getQuantity(), taxedAmount, saleItem.isImported());
+        items.add(receiptItem);
 
         total = total.add(taxedAmount);
         salesTaxes = salesTaxes.add(taxAmount);

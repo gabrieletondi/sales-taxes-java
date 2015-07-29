@@ -2,7 +2,7 @@ package it.gabrieletondi.salestaxes;
 
 import java.math.BigDecimal;
 
-public class BasketItem {
+public class ReceiptItem {
     private final BigDecimal taxedPrice;
     private int quantity;
     private String productName;
@@ -24,7 +24,7 @@ public class BasketItem {
         return isImported;
     }
 
-    public BasketItem(String productName, int quantity, BigDecimal taxedPrice, boolean isImported) {
+    public ReceiptItem(String productName, int quantity, BigDecimal taxedPrice, boolean isImported) {
         this.taxedPrice = taxedPrice;
         this.quantity = quantity;
         this.productName = productName;

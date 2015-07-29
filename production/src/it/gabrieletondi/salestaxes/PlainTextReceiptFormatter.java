@@ -3,20 +3,20 @@ package it.gabrieletondi.salestaxes;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
-public class PlainTextBasketFormatter {
-    public String format(Basket basket) {
-        String receipt = "";
+public class PlainTextReceiptFormatter {
+    public String format(Receipt receipt) {
+        String result = "";
 
-        for(BasketItem item : basket.getItems())
-            receipt += formatReceiptItem(item);
+        for(ReceiptItem item : receipt.getItems())
+            result += formatReceiptItem(item);
 
-        receipt += "Sales Taxes: " + formatDecimal(basket.getSalesTaxes()) + "\n" +
-                "Total: " + formatDecimal(basket.getTotal());
+        result += "Sales Taxes: " + formatDecimal(receipt.getSalesTaxes()) + "\n" +
+                "Total: " + formatDecimal(receipt.getTotal());
 
-        return receipt;
+        return result;
     }
 
-    private String formatReceiptItem(BasketItem item) {
+    private String formatReceiptItem(ReceiptItem item) {
         String source = "";
 
         if (item.isImported())
