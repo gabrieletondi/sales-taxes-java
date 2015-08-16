@@ -2,6 +2,8 @@ package it.gabrieletondi.salestaxes.receipt;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 
 public class PlainTextReceiptFormatter {
     public String format(Receipt receipt) {
@@ -33,6 +35,7 @@ public class PlainTextReceiptFormatter {
 
     private String formatDecimal(BigDecimal value) {
         DecimalFormat decimalFormat = new DecimalFormat("0.00#");
+        decimalFormat.setDecimalFormatSymbols(DecimalFormatSymbols.getInstance(Locale.US));
         return decimalFormat.format(value);
     }
 }
